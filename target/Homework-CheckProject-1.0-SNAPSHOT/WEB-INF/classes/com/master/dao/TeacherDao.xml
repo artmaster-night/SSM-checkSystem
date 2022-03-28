@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.master.dao.TeacherDao">
+    <select id="selectOneTeacher" resultType="com.master.domain.Teacher">
+        select * from teacher where account=#{account}
+    </select>
+    <insert id="insertTeacher">
+        insert into teacher(id, name, account, password) VALUES (#{id},#{account},#{account},#{password})
+    </insert>
+</mapper>
