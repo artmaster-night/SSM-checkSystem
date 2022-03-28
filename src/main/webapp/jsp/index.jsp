@@ -10,7 +10,17 @@
 <head>
     <title>Title</title>
 </head>
+<style>
+    div{
+        align-items: center;
+        background-color: beige;
+        border-radius: inherit;
+    }
+</style>
 <body>
-    <h3>Hello world!</h3>
+    <div>
+        <h3>我是学生》》》</h3><br>
+        <h3>我是老师》》》</h3>
+    </div>
 </body>
 </html>
