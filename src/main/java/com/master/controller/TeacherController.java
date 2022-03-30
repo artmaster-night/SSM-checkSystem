@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author artmaster
@@ -21,27 +22,28 @@ public class TeacherController {
 
     @RequestMapping("/register")
     @ResponseBody
-    public OneResponse register(String account,String password) {
-        Teacher teacher = new Teacher();
-        teacher.setAccount(account);
-        teacher.setPassword(password);
+    public OneResponse register(Teacher teacher) {
         Boolean isSucceed = teacherService.register(teacher);
         OneResponse oneResponse = new OneResponse();
         oneResponse.setFlag(isSucceed);
         oneResponse.setMessage(isSucceed?"注册成功！":"注册失败！");
+        System.out.println(teacher.getAccount() + oneResponse.getMessage());
         return oneResponse;
     }
 
     @RequestMapping("/login")
     @ResponseBody
-    public OneResponse login(String account,String password) {
-        Teacher teacher = new Teacher();
-        teacher.setAccount(account);
-        teacher.setPassword(password);
+    public OneResponse login(Teacher teacher, HttpSession httpSession) {
         Boolean isSucceed = teacherService.loginCheck(teacher);
         OneResponse oneResponse = new OneResponse();
         oneResponse.setFlag(isSucceed);
         oneResponse.setMessage(isSucceed?"登录成功":"密码错误或用户不存在");
+        System.out.println(teacher.getAccount() + oneResponse.getMessage());
+        if(isSucceed){
+            Teacher teacherQuery = teacherService.query(teacher.getAccount());
+            System.out.println("session注入老师ID:" + teacherQuery);
+            httpSession.setAttribute("teacherID",teacherQuery.getId());
+        }
         return oneResponse;
     }
 }

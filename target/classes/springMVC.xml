@@ -7,6 +7,7 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/js/*" location="/js/"/>
     <mvc:resources mapping="/jsp/*" location="/jsp/"/>
+    <mvc:resources mapping="/css/*" location="/css/"/>
 
     <context:component-scan base-package="com.master.controller"/>
 
@@ -14,6 +15,5 @@
         <property name="suffix" value=".jsp"/>
         <property name="prefix" value="/jsp/"/>
     </bean>
-
 
 </beans>

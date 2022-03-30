@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author artmaster
@@ -26,16 +27,23 @@ public class StudentController {
         OneResponse oneResponse = new OneResponse();
         oneResponse.setMessage(isSucceed?"注册成功！":"注册失败！");
         oneResponse.setFlag(isSucceed);
+        System.out.println(student.getAccount() + oneResponse.getMessage());
         return oneResponse;
     }
 
     @RequestMapping("/login")
     @ResponseBody
-    public OneResponse login(Student student) {
+    public OneResponse login(Student student, HttpSession session) {
         Boolean isSucceed = studentService.loginCheck(student);
         OneResponse oneResponse = new OneResponse();
         oneResponse.setMessage(isSucceed?"登录成功！":"用户不存在或密码错误！");
         oneResponse.setFlag(isSucceed);
+        System.out.println(student.getAccount() + oneResponse.getMessage());
+        if (isSucceed){
+            Student stuQuery = studentService.query(student.getAccount());
+            System.out.println("session注入学生ID:"+stuQuery);
+            session.setAttribute("stuID",stuQuery.getId());
+        }
         return oneResponse;
     }
 }
