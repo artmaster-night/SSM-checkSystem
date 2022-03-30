@@ -41,8 +41,8 @@ public class TeacherController {
         System.out.println(teacher.getAccount() + oneResponse.getMessage());
         if(isSucceed){
             Teacher teacherQuery = teacherService.query(teacher.getAccount());
-            System.out.println("session注入老师ID:" + teacherQuery);
-            httpSession.setAttribute("teacherID",teacherQuery.getId());
+            System.out.println("session注入老师:" + teacherQuery);
+            httpSession.setAttribute("teacher",teacherQuery);
         }
         return oneResponse;
     }

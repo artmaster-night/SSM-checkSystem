@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.master.dao.CourseDao">
+    <resultMap id="course" type="com.master.domain.Course">
+        <id property="id" column="id"/>
+        <result property="tId" column="t_id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <select id="selectCourses" resultMap="course">
+        select * from course where t_id=#{tId}
+    </select>
+</mapper>
