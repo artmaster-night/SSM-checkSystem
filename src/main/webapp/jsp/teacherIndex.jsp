@@ -26,17 +26,29 @@
             $(".lookCheck").show()
             $(".addCheck").hide()
         })
+        $("#addCheck").on("click",function () {
+            const course = $("#courseList").val();
+            const password=$("#password").val();
+            const rePassword=$("#rePassword").val();
+            if (password!==rePassword){
+                alert("两次密码不同，请重新输入！")
+            }else {
+                $.post("${pageContext.request.contextPath}/tcheck/addCheck",{tId:${sessionScope.teacher.id},cId:course,password:password},function (data) {
+                    alert(data.message);
+                    $("#password").val("");
+                    $("#rePassword").val("");
+                },"json")
+            }
+        })
     })
     function updateClassList() {
         $.post("${pageContext.request.contextPath}/tcheck/updateCourseList",{tId:${sessionScope.teacher.id}},function (courseList) {
             $("#courseList").empty()
             $.each(courseList,function (i,course) {
-                $("#courseList").append("<option>"+course.name+"</option>")
+                $("#courseList").append("<option value=\""+course.id+"\">"+course.name+"</option>")
+
             })
         },"json")
-    }
-    function x() {
-        
     }
 </script>
 <style>
@@ -78,9 +90,9 @@
             <div class="col-2">
                 <label for="courseList">课程</label>
                 <select class="form-control" id="courseList">
-                    <option>语文</option>
-                    <option>数学</option>
-                    <option>C++</option>
+                    <option value="1">语文</option>
+                    <option value="2">数学</option>
+                    <option value="3">C++</option>
                 </select>
             </div>
             <div class="col-2">
@@ -92,7 +104,7 @@
                 <input type="password" class="form-control" placeholder="请确认..." id="rePassword">
             </div>
             <div class="col-2 offset-2">
-                <button type="button" class="btn btn-primary mt-4">发布</button>
+                <button type="button" class="btn btn-primary mt-4" id="addCheck">发布</button>
             </div>
         </div>
         <div class="lookCheck mx-4 pt-2">
