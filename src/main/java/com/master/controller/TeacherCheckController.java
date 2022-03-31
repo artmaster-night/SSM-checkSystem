@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class TeacherCheckController {
 
 
     /**
-     *
+     * 发布签到
      * @param tId 老师id
      * @param password 签到密码
      * @param cId 课程id
@@ -69,6 +71,18 @@ public class TeacherCheckController {
         oneResponse.setMessage(isSucceed?"发布成功！":"发布失败！");
         oneResponse.setFlag(isSucceed);
         return oneResponse;
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpSession session) {
+        Object attribute = session.getAttribute("teacher");
+        if (attribute!=null){
+            System.out.println("session删除teacher...");
+            session.removeAttribute("teacher");
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
 }

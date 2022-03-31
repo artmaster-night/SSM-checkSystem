@@ -79,7 +79,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Home</li>
         </ol>
-        <span>欢迎您！${sessionScope.teacher.name}</span><span class="ms-2"><a href="index.jsp">[退出登录]</a></span>
+        <span>欢迎您！${sessionScope.teacher.name}</span><span class="ms-2"><a href="${pageContext.request.contextPath}/tcheck/logout">[退出登录]</a></span>
     </nav>
     <div class="p-2  mt-4">
         <button type="button" class="btn btn-primary ms-3" id="btn-add">发布签到</button>
