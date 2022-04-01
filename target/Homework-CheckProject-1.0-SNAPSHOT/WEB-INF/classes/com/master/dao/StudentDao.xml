@@ -10,4 +10,9 @@
         select * from student where account=#{account}
     </select>
 
+    <select id="selectOneStudentById" resultType="com.master.domain.Student">
+        select * from student where id=#{id}
+    </select>
 </mapper>
+
+

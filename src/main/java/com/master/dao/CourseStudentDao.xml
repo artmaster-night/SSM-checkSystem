@@ -17,6 +17,10 @@
     <select id="selectStudentByCid" resultMap="checkList">
         select s_id from course_student where c_id=#{cId}
     </select>
+
+    <select id="selectCourseBysId" resultMap="courseStudent">
+        select * from course_student where s_id=#{sId}
+    </select>
+
+
 </mapper>
-
-

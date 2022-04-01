@@ -41,8 +41,8 @@ public class StudentController {
         System.out.println(student.getAccount() + oneResponse.getMessage());
         if (isSucceed){
             Student stuQuery = studentService.query(student.getAccount());
-            System.out.println("session注入学生ID:"+stuQuery);
-            session.setAttribute("stuID",stuQuery.getId());
+            System.out.println("session注入学生:"+stuQuery);
+            session.setAttribute("student",stuQuery);
         }
         return oneResponse;
     }

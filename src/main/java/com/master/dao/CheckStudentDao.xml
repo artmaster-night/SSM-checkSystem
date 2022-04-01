@@ -28,5 +28,23 @@
         select * from check_student where check_id=#{checkId}
     </select>
 
+    <insert id="insertCheckStudent">
+        insert into check_student(s_id, check_id, check_time)
+            VALUES (#{sId},#{checkId},#{checkTime})
+    </insert>
 
+    <resultMap id="studentCheckList" type="com.master.domain.StudentCheckList">
+        <id property="checkId" column="id"/>
+        <id property="startTime" column="check_time"/>
+    </resultMap>
+    <select id="selectStudentCheckListBycId" resultMap="studentCheckList">
+        select id,check_time from check_teacher where c_id in
+        <foreach collection="courseList" item="course" open="(" separator="," close=")">
+            #{course.cId}
+        </foreach>
+    </select>
+
+    <select id="selectOneCheck" resultMap="checkStudent">
+        select * from check_student where s_id=#{sId} and check_id=#{checkId}
+    </select>
 </mapper>

@@ -19,4 +19,6 @@
         </bean>
 
         <context:component-scan base-package="com.master.service"/>
+
+        <bean id="compare" class="com.master.util.Compare"/>
 </beans>

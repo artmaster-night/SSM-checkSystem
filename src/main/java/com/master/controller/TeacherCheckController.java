@@ -81,7 +81,7 @@ public class TeacherCheckController {
     public ModelAndView logout(HttpSession session) {
         Object attribute = session.getAttribute("teacher");
         if (attribute!=null){
-            System.out.println("session删除teacher...");
+            System.out.println("session删除老师："+attribute);
             session.removeAttribute("teacher");
         }
         ModelAndView modelAndView = new ModelAndView();
@@ -136,4 +136,5 @@ public class TeacherCheckController {
         }
         return checkLists;
     }
+
 }
