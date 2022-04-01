@@ -11,4 +11,5 @@ import java.util.List;
 public interface CourseDao {
     List<Course> selectCourses(@Param("tId") Integer tId);
     Course selectOneCourse(@Param("courseName")String courseName);
+    Course selectOneCourseById(@Param("id")Integer id);
 }

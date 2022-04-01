@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.master.dao.CourseStudentDao">
+    <select id="countStudent" resultType="java.lang.Integer">
+        select count(*) as stuNumber from course_student where c_id=#{cId}
+    </select>
+    <resultMap id="courseStudent" type="com.master.domain.CourseStudent">
+        <id property="id" column="id"/>
+        <result property="cId" column="c_id"/>
+        <result property="sId" column="s_id"/>
+    </resultMap>
+    <resultMap id="checkList" type="com.master.domain.CheckList">
+        <id column="s_id" property="id"/>
+    </resultMap>
+    <select id="selectStudentByCid" resultMap="checkList">
+        select s_id from course_student where c_id=#{cId}
+    </select>
+</mapper>
+
+

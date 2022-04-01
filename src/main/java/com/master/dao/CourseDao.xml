@@ -14,4 +14,7 @@
     <select id="selectOneCourse" resultMap="course">
         select * from course where name=#{courseName}
     </select>
+    <select id="selectOneCourseById" resultMap="course">
+        select * from course where id=#{id}
+    </select>
 </mapper>

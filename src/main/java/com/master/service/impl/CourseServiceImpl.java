@@ -33,4 +33,12 @@ public class CourseServiceImpl implements CourseService {
         }
         return courseDao.selectOneCourse(courseName);
     }
+
+    @Override
+    public Course getCourseById(Integer id) {
+        if (id==null){
+            return null;
+        }
+        return courseDao.selectOneCourseById(id);
+    }
 }

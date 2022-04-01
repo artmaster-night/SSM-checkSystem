@@ -4,10 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.master.dao.CheckTeacherDao">
 
+    <resultMap id="checkTeacher" type="com.master.domain.CheckTeacher">
+        <id column="id" property="id"/>
+        <result column="t_id" property="tId"/>
+        <result column="check_time" property="time"/>
+        <result column="check_password" property="password"/>
+        <result column="c_id" property="cId"/>
+    </resultMap>
+
     <insert id="insertCheckTeacher">
         insert into check_teacher(t_id, check_time, check_password, c_id) values (#{tId},#{time},#{password},#{cId})
     </insert>
-
+    <select id="selectCheckTeachersById" resultMap="checkTeacher">
+        select * from check_teacher where t_id=#{tId} order by check_time desc
+    </select>
+    <delete id="deleteCheck">
+        delete from check_teacher where id=#{checkId}
+    </delete>
+    <select id="selectCidById" resultMap="checkTeacher">
+        select * from check_teacher where id=#{id}
+    </select>
 </mapper>
 
 

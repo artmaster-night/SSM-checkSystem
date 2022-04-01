@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.master.dao.CheckStudentDao">
+
+    <resultMap id="checkStudent" type="com.master.domain.CheckStudent">
+        <id column="id" property="id"/>
+        <result column="s_id" property="sId"/>
+        <result column="check_id" property="checkId"/>
+        <result column="check_time" property="checkTime"/>
+    </resultMap>
+
+    <resultMap id="checkList" type="com.master.domain.CheckList">
+        <id column="s_id" property="id"/>
+    </resultMap>
+
+
+    <select id="countStudent" resultType="java.lang.Integer">
+        select count(*) as number from check_student where check_id=#{checkId}
+    </select>
+
+    <select id="selectChecks" resultMap="checkStudent">
+        select * from check_student where s_id=#{stuId}
+    </select>
+
+    <select id="selectStudentList" resultMap="checkList">
+        select * from check_student where check_id=#{checkId}
+    </select>
+
+
+</mapper>

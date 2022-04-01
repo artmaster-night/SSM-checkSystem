@@ -20,11 +20,23 @@
         $("#btn-add").on("click",function () {
             $(".lookCheck").hide()
             $(".addCheck").show()
-
         })
         $("#btn-look").on("click",function () {
             $(".lookCheck").show()
             $(".addCheck").hide()
+            $.post("${pageContext.request.contextPath}/tcheck/getCheck",{tId:${sessionScope.teacher.id}},function (dataList) {
+                $("#lookCheck").empty()
+                $.each(dataList,function (i,data) {
+                // <div class="checkItem p-4 rounded">
+                //     <span class="checkSubject">数学</span>
+                //     <span class="checkTime">2020.2.3/13.48</span>
+                //     <span>56/89</span>
+                //     <span><a href="checkList.jsp" class="look">查看详情</a></span>
+                //     <span><a href="#" class="delete">删除签到</a></span>
+                // </div>
+                    $("#lookCheck").append();
+                })
+            },"json")
         })
         $("#addCheck").on("click",function () {
             const course = $("#courseList").val();
@@ -46,9 +58,25 @@
             $("#courseList").empty()
             $.each(courseList,function (i,course) {
                 $("#courseList").append("<option value=\""+course.id+"\">"+course.name+"</option>")
-
             })
         },"json")
+    }
+    function getMyDate(str){
+        const oDate = new Date(str),
+            oYear = oDate.getFullYear(),
+            oMonth = oDate.getMonth() + 1,
+            oDay = oDate.getDate(),
+            oHour = oDate.getHours(),
+            oMin = oDate.getMinutes(),
+            oSen = oDate.getSeconds();//最后拼接时间
+        return oYear + '-' + getzf(oMonth) + '-' + getzf(oDay) + ' ' + getzf(oHour) + ':' + getzf(oMin) + ':' + getzf(oSen);
+    }
+    //补0操作
+    function getzf(num){
+        if(parseInt(num) < 10){
+            num = '0'+num;
+        }
+        return num;
     }
 </script>
 <style>
@@ -107,7 +135,7 @@
                 <button type="button" class="btn btn-primary mt-4" id="addCheck">发布</button>
             </div>
         </div>
-        <div class="lookCheck mx-4 pt-2">
+        <div class="lookCheck mx-4 pt-2" id="lookCheck">
             <div class="checkItem p-4 rounded">
                 <span class="checkSubject">数学</span>
                 <span class="checkTime">2020.2.3/13.48</span>

@@ -17,10 +17,10 @@
 <script type="text/javascript">
     $(function () {
         $("#btn-stu").on("click",function () {
-            $(window).attr("location","loginStudent.jsp")
+            $(window).attr("location","${pageContext.request.contextPath}/jsp/loginStudent.jsp")
         })
         $("#btn-teach").on("click",function () {
-            $(window).attr("location","loginTeacher.jsp")
+            $(window).attr("location","${pageContext.request.contextPath}/jsp/loginTeacher.jsp")
         })
     })
 </script>
