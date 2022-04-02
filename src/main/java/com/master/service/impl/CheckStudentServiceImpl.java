@@ -6,7 +6,9 @@ import com.master.service.CheckStudentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * @author artmaster
@@ -73,6 +75,8 @@ public class CheckStudentServiceImpl implements CheckStudentService {
                 studentCheckList.setEndTime(checkStudent.getCheckTime());
             }
         }
+        //排序
+        Collections.reverse(studentCheckLists);
         return studentCheckLists;
     }
 
