@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Param;
 public interface TeacherDao {
     Integer insertTeacher(Teacher teacher);
     Teacher selectOneTeacher(@Param("account") String account);
+    Teacher selectOneTeacherByTid(@Param("tId")Integer tId);
 }

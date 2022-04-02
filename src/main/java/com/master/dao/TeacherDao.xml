@@ -9,4 +9,7 @@
     <insert id="insertTeacher">
         insert into teacher(id, name, account, password) VALUES (#{id},#{account},#{account},#{password})
     </insert>
+    <select id="selectOneTeacherByTid" resultType="com.master.domain.Teacher">
+        select * from teacher where id=#{tId}
+    </select>
 </mapper>

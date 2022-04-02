@@ -15,5 +15,15 @@
         <property name="suffix" value=".jsp"/>
         <property name="prefix" value="/jsp/"/>
     </bean>
-
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/tcheck/**"/>
+            <bean class="com.master.interceptor.TeacherInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/scheck/**"/>
+            <bean class="com.master.interceptor.StudentInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

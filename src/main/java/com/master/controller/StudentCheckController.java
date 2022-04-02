@@ -43,15 +43,17 @@ public class StudentCheckController {
 
         String queryPassword = checkStudentService.searchPassword(checkId);
         boolean match=password.equals(queryPassword);
-
-        CheckStudent checkStudent = new CheckStudent();
-        checkStudent.setsId(sId);
-        checkStudent.setCheckId(checkId);
-        checkStudent.setCheckTime(new Date());
-        boolean result = checkStudentService.addCheckStudent(checkStudent);
+        boolean result=false;
+        if (match){
+            CheckStudent checkStudent = new CheckStudent();
+            checkStudent.setsId(sId);
+            checkStudent.setCheckId(checkId);
+            checkStudent.setCheckTime(new Date());
+            result = checkStudentService.addCheckStudent(checkStudent);
+        }
         OneResponse oneResponse = new OneResponse();
-        oneResponse.setFlag(result&&match);
-        oneResponse.setMessage(result&&match?"签到成功！":"签到失败！");
+        oneResponse.setFlag(result && match);
+        oneResponse.setMessage(result && match?"签到成功！":"签到失败！");
         return oneResponse;
     }
 

@@ -24,20 +24,9 @@
         $("#btn-look").on("click",function () {
             $(".lookCheck").show()
             $(".addCheck").hide()
-            $.post("${pageContext.request.contextPath}/tcheck/getCheck",{tId:${sessionScope.teacher.id}},function (dataList) {
-                $("#lookCheck").empty()
-                $.each(dataList,function (i,data) {
-                // <div class="checkItem p-4 rounded">
-                //     <span class="checkSubject">数学</span>
-                //     <span class="checkTime">2020.2.3/13.48</span>
-                //     <span>56/89</span>
-                //     <span><a href="checkList.jsp" class="look">查看详情</a></span>
-                //     <span><a href="#" class="delete">删除签到</a></span>
-                // </div>
-                    $("#lookCheck").append();
-                })
-            },"json")
+            $.post("${pageContext.request.contextPath}/tcheck/getCheck",{tId:${sessionScope.teacher.id}},startList,"json")
         })
+
         $("#addCheck").on("click",function () {
             const course = $("#courseList").val();
             const password=$("#password").val();
@@ -53,6 +42,29 @@
             }
         })
     })
+    function startList(dataList) {
+        $("#checkList").empty()
+        $.each(dataList,function (i,data) {
+            const checkDiv = $("<div></div>").addClass("checkItem").addClass("p-4").addClass("rounded");
+            const cName = $("<span></span>").append(data.courseName);
+            const time = $("<span></span>").append(getMyDate(data.checkOpenTime));
+            const number = $("<span></span>").append(data.checkNumber + "/" + data.allNumber);
+            const btn1 = $("<button></button>").addClass("bnt").addClass("btn-primary").addClass("mx-4").addClass("lookBtn").append("查看详情").attr("checkID",data.checkId);
+            const btn2 = $("<button></button>").addClass("bnt").addClass("btn-primary").addClass("mx-4").addClass("deleteBtn").append("删除签到").attr("checkID",data.checkId);
+            $("#checkList").append(checkDiv.append(cName,time,number,btn1,btn2));
+        })
+        $(".lookBtn").on("click",function () {
+            const checkId = $(this).attr("checkId");
+            $(location).attr("href","${pageContext.request.contextPath}/tcheck/look?checkId="+checkId);
+        })
+        $(".deleteBtn").on("click",function () {
+            const checkId = $(this).attr("checkId");
+            $.post("${pageContext.request.contextPath}/tcheck/delete",{checkId:checkId},function (data) {
+                alert(data.message);
+                $.post("${pageContext.request.contextPath}/tcheck/getCheck",{tId:${sessionScope.teacher.id}},startList,"json")
+            },"json")
+        })
+    }
     function updateClassList() {
         $.post("${pageContext.request.contextPath}/tcheck/updateCourseList",{tId:${sessionScope.teacher.id}},function (courseList) {
             $("#courseList").empty()
@@ -135,23 +147,9 @@
                 <button type="button" class="btn btn-primary mt-4" id="addCheck">发布</button>
             </div>
         </div>
-        <div class="lookCheck mx-4 pt-2" id="lookCheck">
-            <div class="checkItem p-4 rounded">
-                <span class="checkSubject">数学</span>
-                <span class="checkTime">2020.2.3/13.48</span>
-                <span>56/89</span>
-                <span><a href="checkList.jsp" class="look">查看详情</a></span>
-                <span><a href="#" class="delete">删除签到</a></span>
-            </div>
-            <div class="checkItem p-4 rounded">
-                <span class="checkSubject">数学</span>
-                <span class="checkTime">2020.2.3/13.48</span>
-                <span>56/89</span>
-                <span><a href="checkList.jsp" class="look">查看详情</a></span>
-                <span><a href="#" class="delete">删除签到</a></span>
-            </div>
-        </div>
+        <div class="lookCheck mx-4 pt-2" id="checkList">
 
+        </div>
     </div>
 </div>
 </body>

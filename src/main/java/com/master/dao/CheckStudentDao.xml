@@ -35,10 +35,11 @@
 
     <resultMap id="studentCheckList" type="com.master.domain.StudentCheckList">
         <id property="checkId" column="id"/>
-        <id property="startTime" column="check_time"/>
+        <result property="startTime" column="check_time"/>
+        <result property="teacherId" column="t_id"/>
     </resultMap>
     <select id="selectStudentCheckListBycId" resultMap="studentCheckList">
-        select id,check_time from check_teacher where c_id in
+        select id,check_time,t_id from check_teacher where c_id in
         <foreach collection="courseList" item="course" open="(" separator="," close=")">
             #{course.cId}
         </foreach>

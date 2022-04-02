@@ -8,21 +8,42 @@ import java.util.Date;
 public class StudentCheckList {
     Integer sId;
     Integer checkId;
+    String teacherName;
+    Integer teacherId;
     String courseName;
     Boolean ifCheck;
     Date startTime;
     Date endTime;
+
 
     @Override
     public String toString() {
         return "StudentCheckList{" +
                 "sId=" + sId +
                 ", checkId=" + checkId +
+                ", teacherName='" + teacherName + '\'' +
+                ", teacherId=" + teacherId +
                 ", courseName='" + courseName + '\'' +
                 ", ifCheck=" + ifCheck +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 '}';
+    }
+
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public Integer getsId() {

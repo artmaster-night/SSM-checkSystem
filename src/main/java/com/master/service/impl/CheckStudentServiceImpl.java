@@ -1,9 +1,6 @@
 package com.master.service.impl;
 
-import com.master.dao.CheckStudentDao;
-import com.master.dao.CheckTeacherDao;
-import com.master.dao.CourseDao;
-import com.master.dao.CourseStudentDao;
+import com.master.dao.*;
 import com.master.domain.*;
 import com.master.service.CheckStudentService;
 import org.springframework.stereotype.Service;
@@ -25,6 +22,8 @@ public class CheckStudentServiceImpl implements CheckStudentService {
     private CourseStudentDao courseStudentDao;
     @Resource
     private CourseDao courseDao;
+    @Resource
+    private TeacherDao teacherDao;
 
     @Override
     public boolean addCheckStudent(CheckStudent checkStudent) {
@@ -57,6 +56,9 @@ public class CheckStudentServiceImpl implements CheckStudentService {
         }
         for (StudentCheckList studentCheckList:studentCheckLists){
             studentCheckList.setsId(sId);
+        }
+        for (StudentCheckList studentCheckList:studentCheckLists){
+            studentCheckList.setTeacherName(teacherDao.selectOneTeacherByTid(studentCheckList.getTeacherId()).getName());
         }
         for (StudentCheckList studentCheckList:studentCheckLists){
             studentCheckList.setCourseName(courseDao.selectOneCourseById(checkTeacherDao.selectCidById(studentCheckList.getCheckId()).getcId()).getName());
