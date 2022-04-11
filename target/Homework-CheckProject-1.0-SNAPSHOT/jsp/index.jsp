@@ -12,8 +12,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
-<link type="text/css"  rel="stylesheet" href="../css/bootstrap.min.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<link type="text/css"  rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
 <script type="text/javascript">
     $(function () {
         $("#btn-stu").on("click",function () {
